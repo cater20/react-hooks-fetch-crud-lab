@@ -19,8 +19,28 @@ function QuestionForm(props) {
 
   function handleSubmit(event) {
     event.preventDefault();
-    console.log(formData);
-  }
+
+    fetch("http://localhost:4000/questions",{
+method:"POST",
+Headers:{
+  "Content-Type": "application/json" 
+},
+body:({
+  "prompt":formData.prompt,
+  "answers":[
+    formData.answer1,
+    formData.answer2,
+    formData.answer3,
+    formData.answer4,
+  ],
+  "correctIndex": formData.integer
+})
+  
+//.then((res)=>res.json())
+//.then(()=>onUpdateQuestions(question))
+
+    }
+  )}
 
   return (
     <section>
