@@ -1,6 +1,8 @@
-import React from "react";
+import React ,{useEffect,useState}from "react";
 
 function QuestionList() {
+  const[questionList,setQuestionList]=useState
+  
   return (
     <section>
       <h1>Quiz Questions</h1>
