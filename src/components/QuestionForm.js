@@ -19,28 +19,23 @@ function QuestionForm(props) {
 
   function handleSubmit(event) {
     event.preventDefault();
-
-    fetch("http://localhost:4000/questions",{
-method:"POST",
-Headers:{
-  "Content-Type": "application/json" 
-},
-body:({
-  "prompt":formData.prompt,
-  "answers":[
-    formData.answer1,
-    formData.answer2,
-    formData.answer3,
-    formData.answer4,
-  ],
-  "correctIndex": formData.integer
-})
-  
-//.then((res)=>res.json())
-//.then(()=>onUpdateQuestions(question))
-
-    }
-  )}
+    console.log(formData);
+    fetch('http://localhost:4000/questions',{
+      method:'POST',
+      headers:{
+        'Content-Type':'Application/json',
+         'Accept':'Application/json'
+      },
+      body:JSON.stringify({
+        prompt:formData.prompt,
+        answers:[formData.answer1,formData.answer2,formData.answer3,formData.answer4],
+        correctIndex:formData.correctIndex
+      })
+    })
+    .then(response=>response.json())
+    .then(data=>props.handleNewQuestionAdd(data))
+    .catch(error=>console.log(error))
+  }
 
   return (
     <section>
