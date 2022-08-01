@@ -1,7 +1,17 @@
-import React from "react";
+import React ,{useEffect,useState}from "react";
 import QuestionItem from "./QuestionItem";
 
-function QuestionList({questions,deleteItem,updateAnswer}) {
+function QuestionList({deleteItem,updateAnswer}) {
+
+  const [questions,setQuestions]=useState([])
+
+  useEffect(()=>{
+  fetch('http://localhost:4000/questions')
+  .then((res)=>res.json())
+  .then((questions)=>setQuestions(questions))
+  
+},[questions])
+
   return (
     <section>
       <h1>Quiz Questions</h1>
